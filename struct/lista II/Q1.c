@@ -57,8 +57,8 @@ void maior_menor(Funcionario* funcionario, int n) {
             menor = i;
         }
     }
-    printf("\nMaior salario: %s", funcionario[maior].salario);
-    printf("\nMenor salario: %s", funcionario[menor].salario);
+    printf("\nMaior salario: %f", funcionario[maior].salario);
+    printf("\nMenor salario: %f", funcionario[menor].salario);
 }   
 
 int main() {
