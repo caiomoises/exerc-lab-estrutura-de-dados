@@ -52,8 +52,8 @@ void maior_menor(Pessoa * pessoa, int n) {
             menor = i;
         }
     }
-    printf("\nMaior idade: %s", pessoa[maior].idade);
-    printf("\nMenor idade: %s", pessoa[menor].idade);
+    printf("\nMaior idade: %d", pessoa[maior].idade);
+    printf("\nMenor idade: %d", pessoa[menor].idade);
 } 
 
 int main(void){
