@@ -11,4 +11,5 @@ int main(void){
     --x;
     (*p) += x;
     printf("Valor de X: %i \nValor de Y: %i \nValor de *p: %p", x, y, p);
+    return 0;
 }
