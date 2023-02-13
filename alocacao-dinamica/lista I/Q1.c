@@ -16,4 +16,5 @@ int main(void){
     }
 
     free(vetor);
+    return 0;
 }
