@@ -16,7 +16,7 @@ void preenche(Funcionario ** funcionario, int n){
         printf("Nome: ");
         scanf(" %[^\n]s", funcionario[i]->nome);
 
-        printf("Salario: ");
+        printf("Salario: R$");
         scanf("%f", &funcionario[i]->salario);
 
         printf("Identificador: ");
@@ -28,11 +28,11 @@ void preenche(Funcionario ** funcionario, int n){
 }
 
 void imprime(Funcionario ** funcionario, int n){
-    printf("\n");
+    printf("\n\t\tFUNCIONARIOS CADASTRADOS:\n");
     for(int i = 0; i < n; i++) {
         printf("\n\tFuncionario %d\n", i+1);
         printf("Nome: %s\n", funcionario[i]->nome);
-        printf("Salario: %f\n", funcionario[i]->salario);
+        printf("Salario: R$%.2f\n", funcionario[i]->salario);
         printf("Identificador: %d\n", funcionario[i]->identificador);
         printf("Cargo: %s\n", funcionario[i]->cargo);
     }
@@ -42,7 +42,7 @@ void imprime(Funcionario ** funcionario, int n){
 void altera_salario(Funcionario ** funcionario, int n){
     printf("\n");
     for(int i = 0; i < n; i++) {
-        printf("Novo valor do salario para o funcionario %d: ", i+1);
+        printf("Novo valor do salario para o funcionario %d: R$", i+1);
         scanf("%f", &funcionario[i]->salario);
     }
 }
@@ -57,8 +57,8 @@ void maior_menor(Funcionario ** funcionario, int n){
             menor = i;
         }
     }
-    printf("\nMaior salario: %f", funcionario[maior]->salario);
-    printf("\nMenor salario: %f", funcionario[menor]->salario);
+    printf("\nMaior salario: R$%.2f", funcionario[maior]->salario);
+    printf("\nMenor salario: R$%.2f", funcionario[menor]->salario);
 }   
 
 int main(){
