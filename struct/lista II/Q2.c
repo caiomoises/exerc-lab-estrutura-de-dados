@@ -7,7 +7,8 @@ typedef struct pessoa{
     int CPF;
 }Pessoa;
 
-void preenche(Pessoa ** pessoa, int n) {
+void preenche(Pessoa ** pessoa, int n){
+    printf("\t\tCADASTRO DE PESSOAS: ");
     for(int i = 0; i < n; i++) {
         printf("\n\tDados pessoais: N - %d\n", i+1);
 
@@ -22,33 +23,33 @@ void preenche(Pessoa ** pessoa, int n) {
     }
 }
 
-void imprime(Pessoa ** pessoa, int n) {
-    printf("\n");
+void imprime(Pessoa ** pessoa, int n){
+    printf("\n\n\t\tPESSOAS CADASTRADAS: ");
     for(int i = 0; i < n; i++) {
-        printf("\nnome da pessoa: %s\n", pessoa[i]->nome);
+        printf("\nNome da pessoa: %s\n", pessoa[i]->nome);
 
-        printf("numero do documento da pessoa: %d\n", pessoa[i]->CPF);
+        printf("Numero do documento da pessoa: %d\n", pessoa[i]->CPF);
 
-        printf("idade da pessoa: %d\n", pessoa[i]->idade);
+        printf("Idade da pessoa: %d\n", pessoa[i]->idade);
     }
 
 }
 
-void altera_idade(Pessoa ** pessoa, int n) {
+void altera_idade(Pessoa ** pessoa, int n){
     printf("\n");
     for(int i = 0; i < n; i++) {
-        printf("Infome a nova idade: ");
+        printf("Infome a nova idade para a pessoa %d: ", i+1);
         scanf("%d", &pessoa[i]->idade);
     }
 }
 
-void maior_menor(Pessoa ** pessoa, int n) {
+void maior_menor(Pessoa ** pessoa, int n){
     int i, maior = 0, menor = 0;
     for (i = 0; i < n; i++) {
-        if (pessoa[i]->idade > pessoa[maior]->idade) {
+        if (pessoa[i]->idade > pessoa[maior]->idade){
             maior = i;
         }
-        if (pessoa[i]->idade < pessoa[menor]->idade) {
+        if (pessoa[i]->idade < pessoa[menor]->idade){
             menor = i;
         }
     }
