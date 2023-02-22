@@ -11,8 +11,6 @@ int main(void){
     char * sexo = (char *) malloc(quant * sizeof(char)); 
     int * opn = (int *) malloc(quant * sizeof(int));
 
-    printf("\t----QUESTIONARIO----:\n");
-
     for (i = 0; i < quant; i++){
         printf("Sexo:\nDigite F para feminino;\nDigite M para masculino.");
         scanf(" %c", &sexo[i]);
