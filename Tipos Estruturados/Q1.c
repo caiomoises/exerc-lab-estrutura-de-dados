@@ -166,7 +166,7 @@ int main(void){
     printf("Bem-vindo ao Programa de Gerenciamento de Turmas!\n");
     printf("Este programa gerencia as turmas ofertadas, fornecendo as \nfuncionalidades de matricula, lancamento de notas e listagem de \nalunos.");
     printf("\nAutor: Caio Moises Vieira Cavalcante\tVersao: 1.0.5");
-    while (op != 6){
+    while (op != 6){ //Caso a opção 6 seja escolhida, saira do laço de repetição. 
         printf("\n\n\tMenu:\n1 - Criar turma\n2 - Listar turmas\n3 - Matricular aluno\n4 - Lancar notas\n5 - Listar alunos\n6 - Sair\n\nDigite sua opcao: ");
         scanf("%d", &op);
         switch (op){
@@ -174,14 +174,14 @@ int main(void){
                 printf("Criando nova turma...");
                 printf("\nDigite um id: ");
                 scanf(" %c", &id);
-                if (n == MAX_TURMAS){
+                if (n == MAX_TURMAS){ // caso o numero maxima de turma seja cadastrado.
                     printf("numero maximo atingido");
-                } else if (procura_turma(turma, n, id) != NULL){
+                } else if (procura_turma(turma, n, id) != NULL){ //caso a turma ja esteja cadastrada
                     printf("A turma Ja existe!");
                 } else{
                     turma[n] = (Turma *)malloc(sizeof(Turma));
-                    turma[n] = cria_turma(id);
-                    n++;
+                    turma[n] = cria_turma(id); //chamada da função para criar uma nova turma 
+                    n++; //encremento para saber que mais uma turma foi criada
                     printf("Turma %c criada com sucesso!", id);
                 }
                 break;
@@ -233,9 +233,9 @@ int main(void){
                 break;
             }
         }
-    for (int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++){ //Liberando o espaco de memoria da matriz turma 
         free(turma[i]);
     }
-    free(turma);
+    free(turma);//liberando o espaco de memoria que foi alocado para turma 
     return 0;
 }
