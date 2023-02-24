@@ -10,16 +10,15 @@ typedef struct aluno{
     char nome[100];
     float notas[3];
     float media;
-} Aluno;
+}Aluno;
 
 typedef struct turma{
     char id;  
     int vagas; 
     Aluno * alunos[MAX_VAGAS];
-} Turma;
+}Turma;
 
-
-Turma *cria_uma_turma(char id){
+Turma *cria_turma(char id){
     Turma *turma = malloc(sizeof(Turma)); 
     turma->vagas = MAX_VAGAS;
     turma->id = id;
@@ -52,7 +51,6 @@ Turma *procura_turma(Turma **turma, int n, char id){
 }
 
 void matricula_aluno(Turma *turma, int mat, char *nome){
-
     if (turma->vagas == 0){
         printf("Nao ha vagas disponiveis na turma %c.\n", turma->id);
         return;
@@ -66,8 +64,7 @@ void matricula_aluno(Turma *turma, int mat, char *nome){
     novo_aluno->notas[2] = 0;
     novo_aluno->media = 0;
     
-    int i;
-    for (i = 0; i < MAX_VAGAS; i++){
+    for (int i = 0; i < MAX_VAGAS; i++){
         if (turma->alunos[i] == NULL){
             turma->alunos[i] = novo_aluno;
             turma->vagas--;
@@ -85,7 +82,6 @@ void lanca_notas(Turma *turma){
                 printf("Digite a nota %d: ", s + 1);
                 scanf("%f", &turma->alunos[j]->notas[s]);
             }
-            
             float soma = 0.0;
             for (int s = 0; s < 3; s++)soma += turma->alunos[j]->notas[s];
             turma->alunos[j]->media = soma / 3.0;
@@ -111,7 +107,6 @@ int main(void){
     
     char id, nome[100];
     Turma **turma = (Turma **)malloc(MAX_TURMAS * sizeof(Turma *));
-    
     if (turma == NULL){
         printf("ERRO");
         exit(1);
@@ -136,7 +131,7 @@ int main(void){
                     printf("A turma Ja existe!");
                 } else{
                     turma[n] = (Turma *)malloc(sizeof(Turma));
-                    turma[n] = cria_uma_turma(id);
+                    turma[n] = cria_turma(id);
                     n++;
                     printf("Turma %c criada com sucesso!", id);
                 }
