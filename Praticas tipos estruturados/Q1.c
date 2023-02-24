@@ -2,9 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * Definição das variaveis globais:
+ * MAX_VAGAS indica o número maximo de vagas por turma.
+ * MAX_TURMAS indica o número maximo de turmas que podem ser criadas.
+*/
 #define MAX_VAGAS 3
 #define MAX_TURMAS 2
 
+/**
+ * O tipo 'struct aluno' foi criado para agrupar tipos diversos de variaveis relacionadas a alunos.
+ * O tipo 'struct turma' foi criado para agrupar variaveis relacionado as turmas, como id, vagas e os dados dos alunos.
+ * typedef é a função utilizada para renomear a struct, aqui foi renomeada para Aluno. 
+*/
 typedef struct aluno{
     int mat;
     char nome[100];
@@ -18,6 +28,11 @@ typedef struct turma{
     Aluno * alunos[MAX_VAGAS];
 }Turma;
 
+/**
+ * A função do tipo Turma com retorno, foi implementada para alocar e receber as as 
+ * informações da turma, indicando se há alunos matriculados; 
+ * @param id
+*/
 Turma *cria_turma(char id){
     Turma *turma = malloc(sizeof(Turma)); 
     turma->vagas = MAX_VAGAS;
@@ -29,24 +44,36 @@ Turma *cria_turma(char id){
     return turma;
 }
 
-void imprime_turmas(Turma **turmas, int n){
+/**
+ * A função do tipo void, sem retorno, criada para imprimir o Id das turmas existentes e
+ * a quantidade de vagas que ainda existem;
+ * @param turmas
+ * @param n 
+*/
+void imprime_turmas(Turma **turmas, int n){ //O parametro turmas esta alocado dinamicamente dentro da função principal.
     for (int i = 0; i < n; i++){
         Turma *turma = turmas[i];
         printf("Turma %c - Vagas disponiveis: %d\n", turma->id, turma->vagas);
     }
 }
 
+/**
+ * 
+ * @param turma
+ * @param n
+ * @param id
+*/
 Turma *procura_turma(Turma **turma, int n, char id){
-    int i = 0, verificadorindice = -1;
+    int i = 0, indice = -1;
     for (i = 0; i < n; i++){
         if (turma[i]->id == id){
-            verificadorindice = i;
+            indice = i;
         }
     }
-    if (verificadorindice == -1){
+    if (indice == -1){
         return NULL;
     } else{
-        return turma[verificadorindice];
+        return turma[indice];
     }
 }
 
@@ -90,13 +117,18 @@ void lanca_notas(Turma *turma){
     printf("Notas lancadas com sucesso!\n");
 }
 
+/**
+ * imprime os dados dos alunos cadastrados em suas respectivas turmas,
+ * demonstrando suas notas e media final. 
+ * @param turma
+*/
 void imprime_alunos(Turma *turma){
     printf("Alunos da turma %c:\n\n", turma->id);
     for (int i = 0; i < MAX_VAGAS; i++){
-        Aluno *aluno = turma->alunos[i];
+        Aluno * aluno = turma->alunos[i];
         if (aluno != NULL){
             printf("Matricula: %d\n", aluno->mat);
-            printf("Nome: %s\n", aluno->nome);
+            printf("Nome: %[^\n]s\n", aluno->nome);
             printf("Notas: %.1f, %.1f, %.1f\n", aluno->notas[0], aluno->notas[1], aluno->notas[2]);
             printf("Media: %.1f\n\n", aluno->media);
         }
