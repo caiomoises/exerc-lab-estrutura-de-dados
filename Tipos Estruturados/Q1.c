@@ -37,8 +37,7 @@ Turma *cria_turma(char id){
     Turma *turma = malloc(sizeof(Turma)); 
     turma->vagas = MAX_VAGAS;
     turma->id = id;
-    for (int i = 0; i < MAX_VAGAS; i++)
-    {
+    for (int i = 0; i < MAX_VAGAS; i++){
         turma->alunos[i] = NULL; 
     }
     return turma;
@@ -58,7 +57,8 @@ void imprime_turmas(Turma **turmas, int n){ //O parametro turmas esta alocado di
 }
 
 /**
- * 
+ * A função do tipo Turma, criada para buscar uma turma atraves do seu id
+ * caso a turma exista, ela retornara o index referente a essa turma.
  * @param turma
  * @param n
  * @param id
@@ -77,13 +77,21 @@ Turma *procura_turma(Turma **turma, int n, char id){
     }
 }
 
+/**
+ * A função 'matricula_aluno', do tipo void, criada para fazer a matricula de novos alunos
+ * possui um limite de alunos que podem ser cadastrados, definido como MAX_VAGAS.
+ * A cada aluno que é cadastrado, o valor das vagas é decrementado em 1.
+ * @param turma
+ * @param mat
+ * @param nome
+*/
 void matricula_aluno(Turma *turma, int mat, char *nome){
     if (turma->vagas == 0){
         printf("Nao ha vagas disponiveis na turma %c.\n", turma->id);
         return;
     }
 
-    Aluno *novo_aluno = malloc(sizeof(Aluno));
+    Aluno *novo_aluno = malloc(sizeof(Aluno)); 
     novo_aluno->mat = mat;
     strcpy(novo_aluno->nome, nome);
     novo_aluno->notas[0] = 0;
@@ -100,18 +108,27 @@ void matricula_aluno(Turma *turma, int mat, char *nome){
         }
     }
 }
+
+/**
+ * A função do tipo void, foi criada para que o usuario possa lançar as notas dos alunos, 
+ * em suas respectivas turmas. Após as notas serem lançadas é feito a madia aritmética.
+ * @param turma
+*/
 void lanca_notas(Turma *turma){
+    int s;
+    float soma = 0.0;
     printf("Lancamento de notas para a turma %c:\n", turma->id);
     for (int j = 0; j < MAX_VAGAS; j++){
         if (turma->alunos[j] != NULL){
-            printf("Matricula: %d\t - \tAluno: %s\n", turma->alunos[j]->mat, turma->alunos[j]->nome);
-            for (int s = 0; s < 3; s++){
+            printf("Matricula: %d \nAluno: %s\n", turma->alunos[j]->mat, turma->alunos[j]->nome);//Dados do aluno ao qual sera atribuida a nota
+            for (s = 0; s < 3; s++){
                 printf("Digite a nota %d: ", s + 1);
-                scanf("%f", &turma->alunos[j]->notas[s]);
+                scanf("%f", &turma->alunos[j]->notas[s]); //Recebendo as notas
             }
-            float soma = 0.0;
-            for (int s = 0; s < 3; s++)soma += turma->alunos[j]->notas[s];
-            turma->alunos[j]->media = soma / 3.0;
+            for (s = 0; s < 3; s++){
+                soma += turma->alunos[j]->notas[s];//Soma das notas
+            }
+            turma->alunos[j]->media = soma / 3;//Media aritmetrica
         }
     }
     printf("Notas lancadas com sucesso!\n");
@@ -128,7 +145,7 @@ void imprime_alunos(Turma *turma){
         Aluno * aluno = turma->alunos[i];
         if (aluno != NULL){
             printf("Matricula: %d\n", aluno->mat);
-            printf("Nome: %[^\n]s\n", aluno->nome);
+            printf("Nome: %s\n", aluno->nome);
             printf("Notas: %.1f, %.1f, %.1f\n", aluno->notas[0], aluno->notas[1], aluno->notas[2]);
             printf("Media: %.1f\n\n", aluno->media);
         }
